@@ -32,7 +32,7 @@ market plus the buzz/trend they generate in news, and present them as a feed
 
 ## Phases
 
-- [ ] **Phase 0 — Scaffold:** Next.js app, Supabase schema, env, this doc.
+- [x] **Phase 0 — Scaffold:** Next.js app, Supabase schema, env, this doc.
 - [ ] **Phase 1 — Vertical slice:** HN adapter → buzz → `products` → `GET /api/products`
       → minimal ranked feed + manual `POST /api/ingest`. Zero external creds.
 - [ ] **Phase 2 — Full sources + polish:** Product Hunt + Tech-news adapters,
@@ -41,10 +41,10 @@ market plus the buzz/trend they generate in news, and present them as a feed
 
 ## Current status
 
-- **Phase:** Pre-implementation (design approved).
-- **Done:** Design spec written and approved. Context file seeded.
-- **Next:** Write the implementation plan, then start Phase 0.
+- **Phase:** Phase 0 complete.
+- **Done:** Task 1 and Task 2 complete: Next.js app scaffolded, Vitest configured, smoke test added, Supabase schema/env/admin client added, and tests/build pass.
+- **Next:** Start Phase 1.
 
 ## Notes / open items
 
-- (none yet)
+- Supabase schema was applied successfully in the Supabase SQL editor; `products` and `ingest_runs` are visible in the database.

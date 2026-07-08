@@ -41,10 +41,12 @@ market plus the buzz/trend they generate in news, and present them as a feed
 
 ## Current status
 
-- **Phase:** Pre-implementation (design approved).
-- **Done:** Design spec written and approved. Context file seeded.
-- **Next:** Write the implementation plan, then start Phase 0.
+- **Phase:** Phase 1 in progress.
+- **Done:** Design spec and implementation plan written. Repo scaffolded from a docs-only state. Phase 0 foundations, Supabase schema/client, RawItem types, deterministic buzz scoring, Hacker News parser/fetcher, Task 5 ingest orchestrator, and Task 6 `GET /api/products` route are implemented with tests.
+- **Next:** Task 7 — auth-gated `POST /api/ingest` route wiring Hacker News into Supabase.
 
 ## Notes / open items
 
-- (none yet)
+- Supabase schema exists at `supabase/schema.sql`; manual application in the Supabase SQL editor is not confirmed.
+- `npm install` completed and generated `package-lock.json`; npm reported transitive audit issues that still need review.
+- `next.config.ts` pins `outputFileTracingRoot` to this repo because a parent `/home/radhika/package-lock.json` made Next infer the wrong workspace root during build.

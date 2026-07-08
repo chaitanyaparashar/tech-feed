@@ -454,7 +454,7 @@ git commit -m "feat: add Hacker News source adapter"
 - Produces: `type ProductRow = RawItem & { buzz_score: number }`.
 - Produces: `runIngest(deps: IngestDeps): Promise<{ total: number; bySource: Record<string, number>; errors: string[] }>`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```ts
 // src/lib/ingest/run.test.ts
@@ -511,7 +511,7 @@ test("one failing source does not abort the run", async () => {
 Run: `npm test -- ingest`
 Expected: FAIL — cannot find module `@/lib/ingest/run`.
 
-- [ ] **Step 3: Implement `src/lib/ingest/run.ts`**
+- [x] **Step 3: Implement `src/lib/ingest/run.ts`**
 
 ```ts
 import { scoreBuzz } from "@/lib/buzz";
@@ -559,7 +559,7 @@ export async function runIngest(deps: IngestDeps): Promise<IngestResult> {
 }
 ```
 
-- [ ] **Step 4: Run test — expect PASS**
+- [x] **Step 4: Run test — expect PASS**
 
 Run: `npm test -- ingest`
 Expected: 2 passed.
@@ -583,7 +583,7 @@ git commit -m "feat: add ingest orchestrator with dedupe and scoring"
 - Consumes: `getSupabaseAdmin` from `@/lib/supabase`.
 - Produces: `GET(): Promise<Response>` returning `{ products: ProductRow[] }` ordered by `buzz_score desc`. Accepts a `?source=` filter.
 
-- [ ] **Step 1: Write the failing test (inject a fake client via module mock)**
+- [x] **Step 1: Write the failing test (inject a fake client via module mock)**
 
 ```ts
 // src/app/api/products/route.test.ts
@@ -619,7 +619,7 @@ test("returns products ordered by buzz", async () => {
 Run: `npm test -- products/route`
 Expected: FAIL — cannot find module `@/app/api/products/route`.
 
-- [ ] **Step 3: Implement `src/app/api/products/route.ts`**
+- [x] **Step 3: Implement `src/app/api/products/route.ts`**
 
 ```ts
 import { getSupabaseAdmin } from "@/lib/supabase";
@@ -637,7 +637,7 @@ export async function GET(request: Request): Promise<Response> {
 }
 ```
 
-- [ ] **Step 4: Run test — expect PASS**
+- [x] **Step 4: Run test — expect PASS**
 
 Run: `npm test -- products/route`
 Expected: 1 passed.

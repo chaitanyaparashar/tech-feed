@@ -41,11 +41,12 @@ market plus the buzz/trend they generate in news, and present them as a feed
 
 ## Current status
 
-- **Phase:** Phase 0 complete.
-- **Done:** Task 1 and Task 2 complete: Next.js app scaffolded, Vitest configured, smoke test added, Supabase schema/env/admin client added, tests/build pass, and a basic Supabase Auth login page was added at `/login`.
-- **Next:** Start Phase 1.
+- **Phase:** Phase 1 in progress.
+- **Done:** Task 1 and Task 2 complete; Supabase schema/client/env setup is done; a basic Supabase Auth login page was added at `/login`; RawItem types, deterministic buzz scoring, Hacker News adapter, Task 5 ingest orchestrator, and Task 6 `GET /api/products` route are implemented with tests.
+- **Next:** Task 7 — auth-gated `POST /api/ingest` route wiring Hacker News into Supabase.
 
 ## Notes / open items
 
 - Supabase schema was applied successfully in the Supabase SQL editor; `products` and `ingest_runs` are visible in the database.
 - Login uses Supabase Auth from the browser and needs `NEXT_PUBLIC_SUPABASE_URL` plus `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`.
+- `npm install` completed and generated `package-lock.json`; npm reported transitive audit issues that still need review.

@@ -42,9 +42,10 @@ market plus the buzz/trend they generate in news, and present them as a feed
 ## Current status
 
 - **Phase:** Phase 0 complete.
-- **Done:** Task 1 and Task 2 complete: Next.js app scaffolded, Vitest configured, smoke test added, Supabase schema/env/admin client added, and tests/build pass.
+- **Done:** Task 1 and Task 2 complete: Next.js app scaffolded, Vitest configured, smoke test added, Supabase schema/env/admin client added, tests/build pass, and a basic Supabase Auth login page was added at `/login`.
 - **Next:** Start Phase 1.
 
 ## Notes / open items
 
 - Supabase schema was applied successfully in the Supabase SQL editor; `products` and `ingest_runs` are visible in the database.
+- Login uses Supabase Auth from the browser and needs `NEXT_PUBLIC_SUPABASE_URL` plus `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`.

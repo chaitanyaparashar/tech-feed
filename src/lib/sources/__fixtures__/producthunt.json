@@ -1,0 +1,18 @@
+{
+  "products": [
+    {
+      "name": "PH AI One",
+      "tagline": "The best AI",
+      "url": "https://ph/one",
+      "votes": 420,
+      "comments": 30
+    },
+    {
+      "name": "PH AI Two",
+      "tagline": "Another AI",
+      "url": "https://ph/two",
+      "votes": 88,
+      "comments": 5
+    }
+  ]
+}

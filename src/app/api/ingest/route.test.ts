@@ -40,6 +40,8 @@ const from = vi.fn((table: string) => {
 
 vi.mock("@/lib/supabase", () => ({
   getSupabaseAdmin: () => ({ from }),
+  withTable: async (_client: unknown, primaryTable: string, _fallbackTable: string, run: (table: string) => Promise<unknown>) =>
+    run(primaryTable),
 }));
 
 beforeEach(() => {

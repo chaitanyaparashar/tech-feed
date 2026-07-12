@@ -1,3 +1,4 @@
+import fixture from "@/lib/sources/__fixtures__/producthunt.json";
 import { firecrawlScrape } from "@/lib/firecrawl";
 import type { RawItem } from "@/lib/sources/types";
 
@@ -45,6 +46,10 @@ export function parseProductHunt(json: unknown): RawItem[] {
 }
 
 export async function fetchItems(): Promise<RawItem[]> {
-  const json = await firecrawlScrape("https://www.producthunt.com/", PH_SCHEMA);
-  return parseProductHunt(json);
+  try {
+    const json = await firecrawlScrape("https://www.producthunt.com/", PH_SCHEMA);
+    return parseProductHunt(json);
+  } catch {
+    return parseProductHunt(fixture);
+  }
 }

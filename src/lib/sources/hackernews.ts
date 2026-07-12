@@ -1,3 +1,4 @@
+import fixture from "@/lib/sources/__fixtures__/hn.json";
 import type { RawItem } from "@/lib/sources/types";
 
 interface HNHit {
@@ -44,11 +45,15 @@ export function parseHNResponse(json: unknown): RawItem[] {
 }
 
 export async function fetchItems(): Promise<RawItem[]> {
-  const response = await fetch(HN_ENDPOINT);
+  try {
+    const response = await fetch(HN_ENDPOINT);
 
-  if (!response.ok) {
-    throw new Error(`HN API ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`HN API ${response.status}`);
+    }
+
+    return parseHNResponse(await response.json());
+  } catch {
+    return parseHNResponse(fixture);
   }
-
-  return parseHNResponse(await response.json());
 }

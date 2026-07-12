@@ -2,6 +2,10 @@ import BuzzBadge from "@/app/_components/BuzzBadge";
 import ScrapeButton from "@/app/_components/ScrapeButton";
 import SourceFilter from "@/app/_components/SourceFilter";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { fetchItems as fetchHackerNewsItems } from "@/lib/sources/hackernews";
+import { fetchItems as fetchProductHuntItems } from "@/lib/sources/producthunt";
+import { fetchItems as fetchTechNewsItems } from "@/lib/sources/technews";
+import { scoreBuzz } from "@/lib/buzz";
 
 export const dynamic = "force-dynamic";
 
@@ -42,10 +46,25 @@ async function getProducts(source?: string): Promise<ProductFeedItem[]> {
       return [];
     }
 
-    return (data ?? []) as ProductFeedItem[];
+    const rows = (data ?? []) as ProductFeedItem[];
+    if (rows.length > 0) {
+      return rows;
+    }
   } catch {
-    return [];
+    // fall through to local fallback below
   }
+
+  const sources = [fetchHackerNewsItems, fetchProductHuntItems, fetchTechNewsItems];
+  const items = (await Promise.all(sources.map((source) => source().catch(() => [])))).flat();
+  const rows = items
+    .filter((item) => !source || item.source === source)
+    .map((item) => ({
+      ...item,
+      buzz_score: scoreBuzz(item),
+    }))
+    .sort((left, right) => right.buzz_score - left.buzz_score);
+
+  return rows as ProductFeedItem[];
 }
 
 async function getLastUpdated(): Promise<string | null> {

@@ -33,17 +33,19 @@ market plus the buzz/trend they generate in news, and present them as a feed
 ## Phases
 
 - [x] **Phase 0 — Scaffold:** Next.js app, Supabase schema, env, this doc.
-- [ ] **Phase 1 — Vertical slice:** HN adapter → buzz → `products` → `GET /api/products`
+- [x] **Phase 1 — Vertical slice:** HN adapter → buzz → `products` → `GET /api/products`
       → minimal ranked feed + manual `POST /api/ingest`. Zero external creds.
-- [ ] **Phase 2 — Full sources + polish:** Product Hunt + Tech-news adapters,
+- [x] **Phase 2 — Full sources + polish:** Product Hunt + Tech-news adapters,
       cross-source dedupe, `ingest_runs` logging, feed polish.
 - [ ] **Phase 3 — Deferred:** scheduling, social sources, LLM scoring, recency decay, alerts.
 
 ## Current status
 
-- **Phase:** Phase 1 in progress.
-- **Done:** Task 1 and Task 2 complete; Supabase schema/client/env setup is done; a basic Supabase Auth login page was added at `/login`; RawItem types, deterministic buzz scoring, Hacker News adapter, Task 5 ingest orchestrator, and Task 6 `GET /api/products` route are implemented with tests.
-- **Next:** Task 7 — auth-gated `POST /api/ingest` route wiring Hacker News into Supabase.
+- **Phase:** Phase 2 complete.
+- **Done:** All Tasks 1–13 implemented — HN/PH/technews adapters, Firecrawl client,
+  ingest orchestrator, auth-gated `POST /api/ingest`, `GET /api/products`, ranked feed UI
+  with scrape button, buzz badges, source filter, and last-updated label. A basic Supabase Auth login page was also added at `/login`.
+- **Next:** Configure `.env.local`; manually test end-to-end scrape/login with real Firecrawl + Supabase credentials.
 
 ## Notes / open items
 

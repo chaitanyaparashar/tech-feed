@@ -9,7 +9,13 @@ export async function POST(request: Request): Promise<Response> {
   const provided = request.headers.get("x-ingest-secret") ?? "";
 
   if (secret !== "dev-secret" && provided !== secret) {
-    return Response.json({ error: "unauthorized" }, { status: 401 });
+    return Response.json(
+      {
+        error: "unauthorized",
+        note: "Make sure NEXT_PUBLIC_INGEST_SECRET and INGEST_SECRET match in Vercel environment variables.",
+      },
+      { status: 401 },
+    );
   }
 
   let db: ReturnType<typeof getSupabaseAdmin> | null = null;
@@ -18,7 +24,7 @@ export async function POST(request: Request): Promise<Response> {
     db = getSupabaseAdmin();
   } catch (error) {
     const message = error instanceof Error ? error.message : "Supabase configuration error";
-    return Response.json({ error: message }, { status: 500 });
+    return Response.json({ error: message, note: "Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel env vars" }, { status: 500 });
   }
 
   const startedAt = new Date().toISOString();
@@ -48,18 +54,22 @@ export async function POST(request: Request): Promise<Response> {
       upsert,
     });
 
-    await withTable(
-      db!,
-      "ingest_runs",
-      "ingest_run",
-      async (table) =>
-        db!.from(table).insert({
-          started_at: startedAt,
-          finished_at: new Date().toISOString(),
-          status: result.errors.length ? "partial" : "ok",
-          counts: result,
-        }),
-    );
+    try {
+      await withTable(
+        db!,
+        "ingest_runs",
+        "ingest_run",
+        async (table) =>
+          db!.from(table).insert({
+            started_at: startedAt,
+            finished_at: new Date().toISOString(),
+            status: result.errors.length ? "partial" : "ok",
+            counts: result,
+          }),
+      );
+    } catch {
+      // ingest can still succeed even if logging is unavailable in Vercel
+    }
 
     return Response.json(result);
   } catch (error) {

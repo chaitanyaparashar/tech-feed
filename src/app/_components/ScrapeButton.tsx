@@ -20,8 +20,11 @@ export default function ScrapeButton() {
         },
       });
 
+      const body = await response.json().catch(() => null);
+
       if (!response.ok) {
-        setError("Scrape failed");
+        const message = body?.error ? String(body.error) : "Scrape failed";
+        setError(message);
         return;
       }
 
